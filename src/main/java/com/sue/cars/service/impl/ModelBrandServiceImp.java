@@ -1,15 +1,19 @@
 package com.sue.cars.service.impl;
 
+import com.sue.cars.dtos.BrandDTO;
 import com.sue.cars.dtos.ModelBrandDTO;
 import com.sue.cars.dtos.diplay.DisplayModelBrand;
 import com.sue.cars.entity.Brand;
 import com.sue.cars.entity.ModelBrand;
+import com.sue.cars.mappers.BrandMapper;
 import com.sue.cars.mappers.ModelBrandMapper;
 import com.sue.cars.repository.brandRepository;
 import com.sue.cars.repository.modelBrandRepository;
 import com.sue.cars.service.ModelBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +29,8 @@ public class ModelBrandServiceImp implements ModelBrandService {
     private brandRepository brandRep;
     @Autowired
     private ModelBrandMapper modelBrandMapper;
+    @Autowired
+    private BrandMapper brandMapper;
 
     @Override
     public List<DisplayModelBrand> getAll() {
@@ -47,6 +53,24 @@ public class ModelBrandServiceImp implements ModelBrandService {
         return modelBrandRep.findAll(PageRequest.of(offset, pageSize)).stream().
                 map(modelBrand -> modelBrandMapper.modelBrandToModelBrandDTO(modelBrand))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DisplayModelBrand> getByModelYearAndBrand(BrandDTO brandDTO, int modelYear) {
+        return modelBrandRep.findModelBrandByBrandAndModelYear(
+            brandMapper.BrandDtoToBrand(brandDTO),
+                modelYear
+        ).stream().map(modelBrand -> modelBrandMapper.modelBrandToModelBrandDTO(modelBrand)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Integer> gerDistinctModelYear() {
+        return modelBrandRep.getDistinctModelYear();
+    }
+
+    @Override
+    public Page<ModelBrand> getModelBrandPage(int currentPage, int pageSize) {
+        return modelBrandRep.findAll(PageRequest.of(currentPage, pageSize));
     }
 
     @Override

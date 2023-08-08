@@ -14,6 +14,16 @@
 ::-webkit-scrollbar{
     width: 0;
 }
+.pageNumbers{
+    margin: 50px 50px;
+    display: flex;
+    font-family: Algerian;
+    justify-content: space-around;
+}
+.pageNumbers .pagination{
+    color: #0ae2fe;
+    text-decoration-line: none;
+}
 body{
     direction: ltr;
     scroll-behavior: smooth;
@@ -174,29 +184,39 @@ section h3::before{
 .input-text {
     flex: 1;
     padding: 10px;
-    border: none;
+    /*border: none;*/
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(14, 228, 228, 0.1);
     font-size: 16px;
     color: #03f1e6;
     transition: box-shadow 0.3s ease;
+    /*border-style: inherit;*/
+    border-color: lightslategray;
 }
 
 .input-button {
     padding: 10px 15px;
-    border: none;
+    /*border: none;*/
     border-radius: 5px;
     background-color: #00f7ff;
-    color: #fff;
+    color: #ffffff;
     font-size: 16px;
     cursor: pointer;
+    border-style: inset;
+    border-color: lightslategray;
 }
-.card{
+.row .card{
     padding: 10px;
     margin: 5px;
+    border-color: lightslategray;
+    border-radius: 5%;
 }
 .input-button:hover {
     background-color: #00eeff;
+}
+.row .card .card-header{
+    color: #0ae2fe;
+    background-color: lightslategray;
 }
 
 .input-button:focus {

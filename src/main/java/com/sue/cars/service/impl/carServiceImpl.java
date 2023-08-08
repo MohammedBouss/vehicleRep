@@ -1,6 +1,7 @@
 package com.sue.cars.service.impl;
 
 import com.sue.cars.dtos.CarDTO;
+import com.sue.cars.dtos.ModelBrandDTO;
 import com.sue.cars.dtos.diplay.DisplayCarDTO;
 import com.sue.cars.dtos.diplay.DisplayModelBrand;
 import com.sue.cars.entity.*;
@@ -9,6 +10,7 @@ import com.sue.cars.mappers.ModelBrandMapper;
 import com.sue.cars.repository.*;
 import com.sue.cars.service.carService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +37,18 @@ public class carServiceImpl implements carService {
     @Override
     public List<DisplayCarDTO> getAllCars(int offset, int pageSize) {
         return carRep.findAll(PageRequest.of(offset, pageSize)).getContent()
+                .stream().
+                map(car -> carMapper.carToDisCarDto(car))
+                .collect(Collectors.toList());
+    }
+
+    public Page<Car> getCarsByPage(int offset, int pageSize) {
+        return carRep.findAll(PageRequest.of(offset, pageSize));
+    }
+
+    @Override
+    public List<DisplayCarDTO> getCarByModelBrand(ModelBrandDTO modelBrand) {
+        return carRep.findCarByModelBrand(modelBrandMapper.modelBrandDTOToModelBrand(modelBrand))
                 .stream().
                 map(car -> carMapper.carToDisCarDto(car))
                 .collect(Collectors.toList());

@@ -39,8 +39,29 @@
         </ul>
       </div>
     </div>
+    <div class="pageNumbers" >
+      <div th:each="pageNumber : ${pageNumbers}" >
+        <a th:href="@{/viewModels(currentPage=${pageNumber}, pageSize=${modelBrandPage.getSize()})}" th:text="${pageNumber}" class="pagination" >
+        </a>
+      </div>
+    </div>
+    <form th:action="@{/searchModelBrandsByBrandAndYear}" method="get" >
+      <select class="form-control" id="dropDownList" name="brandName" >
+        <option value="0">select Brands</option>
+        <option th:each="brand : ${brands}" th:value="${brand.name}" th:text="${brand.name}"></option>
+      </select>
+      <select class="form-control" id="dropDownList2"name="modelYear" >
+        <option value="0">select Years</option>
+        <option th:each="modelYear : ${modelYears}" th:value="${modelYear}" th:text="${modelYear}"></option>
+      </select>
+      <button class="input-button">Search</button>
+    </form>
   </div>
 </section>
+
+
+
+
 
 
 </body>
