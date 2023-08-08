@@ -39,6 +39,7 @@ public class brandServiceImpl implements brandService {
         Optional<Brand> brand = brandRep.findByName(name);
         if(brand.isPresent())
             return brandMapper.BrandToBrandDTO(brand.get());
+        System.out.println("not present ");
         return null;
     }
 

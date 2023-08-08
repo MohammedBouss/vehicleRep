@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -27,6 +28,7 @@
           Car
         </div>
         <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span th:text="${result.id}"></span></li>
           <li class="list-group-item"><span th:text="${result.modelName}"></span></li>
           <li class="list-group-item"><span th:text="${result.brandName}"></span></li>
           <li class="list-group-item"><span th:text="${result.vin}"></span></li>
@@ -38,6 +40,9 @@
           <li class="list-group-item"><span th:text="${result.cityName}"></span></li>
           <li class="list-group-item"><span th:text="${result.countryName}"></span></li>
         </ul>
+        <a class="btn btn-primary mb-2" th:href="@{'update/'} + ${result.id}">Update</a>
+        <a class="btn btn-danger mb-2" th:href="@{'delete/'} + ${result.vin}" onclick="return confirm('Are you sure you want to delete this Car?')">Delete</a>
+
       </div>
       <div th:unless="${results.size() > 0}" >
         <h2 style="text-align: center"> No Car With This VIN</h2>

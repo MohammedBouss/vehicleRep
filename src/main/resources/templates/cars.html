@@ -25,10 +25,20 @@
             <form th:action="@{/searchCars}" method="get">
                 <input type="text" name="vin" class="input-text" placeholder="search cars...">
                 <button class="input-button">Search</button>
+                <input type="radio" name="vin" id="vin" class="input-text" value="vin" >
+                <label class="custom-control-label" for="vin">Vin</label>
+                <input type="radio" name="brandName" id="brandName" class="input-text" value="brandName" >
+                <label class="custom-control-label" for="brandName">Brand</label>
+                <input type="radio" name="dolVehicleId" id="dolVehicleId" class="input-text" value="dolVehicleId" >
+                <label class="custom-control-label" for="dolVehicleId">Dol Vehicle Id</label>
+                <input type="radio" name="electricRange" id="electricRange" class="input-text" value="electricRange" >
+                <label class="custom-control-label" for="electricRange">Range</label>
+                <input type="radio" name="modelBrand" id="modelBrand" class="input-text" value="modelBrand">
+                <label class="custom-control-label" for="modelBrand">Model</label>
             </form>
         </div>
-<div class="container" style="margin:auto" >
-    <div class="row"  >
+<div class="container" style="margin:auto">
+    <div class="row">
         <div class="card" style="width: 18rem;" th:if="${cars}" th:each="car: ${cars}" >
             <div class="card-header">
                 Car
@@ -40,9 +50,18 @@
             </ul>
         </div>
     </div>
+<!--    th:if="${bookPage.totalPages > 0}" class="pagination"  th:class="${pageNumber==carPage.number + 1} ? active" -->
+    <div class="pageNumbers" >
+        <div th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/viewCars(pageSize=${carPage.size}, offset=${pageNumber})}"
+               th:text="${pageNumber}" class="pagination"
+            ></a>
+        </div>
+    </div>
 </div>
     </div>
 </section>
+
 
 </body>
 </html>

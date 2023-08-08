@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Page</title>
+  <title>Search Model By Brand And Year Page</title>
   <!-- Fonts Links Are in Description -->
   <!-- thuluth decorated Font-->
   <link rel="stylesheet" type="text/css" href="https://www.fontstatic.com/f=thuluth-decorated" />
@@ -23,18 +22,18 @@
 <section class="main" style="margin-top: 60px" >
   <div class="container" style="margin:auto" >
     <div class="row">
-      <div class="card" style="width: 18rem;" th:if="${result != null}" >
+      <div class="card" style="width: 18rem;" th:if="${displayModelBrands.size()>0}" th:each="displayModelBrand : ${displayModelBrands}" >
         <div class="card-header">
-          Model Brand
+          Model
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><span th:text="${result.name}"></span></li>
+          <li class="list-group-item"><span th:text="${displayModelBrand.name}"></span></li>
+          <li class="list-group-item"><span th:text="${displayModelBrand.brandName}"></span></li>
+          <li class="list-group-item"><span th:text="${displayModelBrand.modelYear}"></span></li>
         </ul>
-        <a class="btn btn-primary mb-2" th:href="@{'update/modelBrand/'} + ${result.id}">Update</a>
-        <a class="btn btn-danger mb-2" th:href="@{'delete/modelBrand/'} + ${result.id}" onclick="return confirm('Are you sure you want to delete this Car?')">Delete</a>
       </div>
-      <div th:unless="${result != null}" >
-        <h2 style="text-align: center"> No Model Brand With This NAME</h2>
+      <div th:unless="${displayModelBrands.size()>0}" >
+        <h2 style="text-align: center"> No Model With This Informations</h2>
       </div>
     </div>
   </div>

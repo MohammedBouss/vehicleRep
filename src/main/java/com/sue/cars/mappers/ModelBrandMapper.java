@@ -1,7 +1,9 @@
 package com.sue.cars.mappers;
 
+import com.sue.cars.dtos.CarDTO;
 import com.sue.cars.dtos.ModelBrandDTO;
 import com.sue.cars.dtos.diplay.DisplayModelBrand;
+import com.sue.cars.entity.Car;
 import com.sue.cars.entity.ModelBrand;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ModelBrandMapper {
         DisplayModelBrand displayModelBrand = modelMapper.map(modelBrand, DisplayModelBrand.class);
         displayModelBrand.setBrandName(modelBrand.getBrand().getName());
         return displayModelBrand;
+    }
+    public ModelBrandDTO modelToDto(ModelBrand modelBrand){
+        return modelMapper.map(modelBrand,ModelBrandDTO.class);
     }
 
     public ModelBrand modelBrandDTOToModelBrand(ModelBrandDTO modelBrandDTO){

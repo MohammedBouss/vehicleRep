@@ -52,6 +52,25 @@ public class StateServiceImpl implements StateService {
     }
 
     @Override
+    public List<State> findByCountry(Long id) {
+        return stateRep.findByCountry(id);
+    }
+
+    @Override
+    public DisplayStateDTO findByName(String name) {
+        Optional<State> state = stateRep.findByName(name);
+        if(state.isPresent()){
+            return stateMapper.stateToStateDTO(state.get());
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> findStateByCountryName(String name) {
+        return stateRep.findStateByCountryName(name);
+    }
+
+    @Override
     public DisplayStateDTO addEntity(Object stateObject) {
         StateDTO stateDTO = (StateDTO) stateObject;
         Optional<Country> country = countryRep.findById(stateDTO.getCountryId());
